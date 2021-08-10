@@ -27,7 +27,7 @@ export function Home() {
         <div id="page-auth">
             <aside>
                 <img src={illustrationImg} alt="Illstration"></img>
-                <strong>Crie salas de Q&amp ao vivo</strong>
+                <strong>Crie salas de Q&amp;A ao vivo</strong>
                 <p>Tire duvidas em tempo real</p>
             </aside>
             <main>

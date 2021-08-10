@@ -22,7 +22,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     const [user, setUser] = useState<User>();
 
 
-    useEffect(() => {
+    /*useEffect(() => {
       const unsubscrine = auth.onAuthStateChanged(user => {
         if (user) {
           const {displayName, photoURL, uid} = user
@@ -43,7 +43,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         unsubscrine();
       }
     } , [])
-  
+  */
   
   
     async function signInWithGoogle() {

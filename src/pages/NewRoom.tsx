@@ -5,26 +5,48 @@ import logoImg from '../assets/images/logo.svg';
 import '../styles/auth.scss';
 import { Button } from '../components/Button';
 import { useAuth } from '../hooks/useAuth';
+import { FormEvent } from 'react';
+import { useState } from 'react';
+import { database } from '../services/firebase';
 
 export function NewRoom() {
 
     const { user } = useAuth();
+    const [newRoom, setNewRoom] = useState('');
+
+    async function handleCreateRoom(event: FormEvent) {
+        event.preventDefault();
+        console.log('new room');
+
+        if (newRoom.trim() ==='') {
+            return;
+        }
+
+        const roomRef = database.ref('rooms');
+
+        const firebaseRoom = await roomRef.push({
+            title: newRoom,
+            authorId: user?.id
+        })
+    }
 
     return (
         <div id="page-auth">
             <aside>
                 <img src={illustrationImg} alt="Illstration"></img>
-                <strong>Crie salas de Q&amp ao vivo</strong>
+                <strong>Crie salas de Q&amp;A ao vivo</strong>
                 <p>Tire duvidas em tempo real</p>
             </aside>
             <main>
                 <div className="main-content">
                     <img src={logoImg} alt="LetMeAsk"></img>
                     <h2>Criar uma nova sala</h2>
-                    <form>
+                    <form onSubmit={handleCreateRoom}>
                         <input
                             type="text"
                             placeholder="Nome da sala"
+                            onChange={event => setNewRoom(event.target.value)}
+                            value={newRoom}
                         />
                         <Button type="submit">
                             Criar sala
